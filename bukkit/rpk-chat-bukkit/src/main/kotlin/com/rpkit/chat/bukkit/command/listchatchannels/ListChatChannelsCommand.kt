@@ -17,18 +17,16 @@ package com.rpkit.chat.bukkit.command.listchatchannels
 
 import com.rpkit.chat.bukkit.RPKChatBukkit
 import com.rpkit.chat.bukkit.chatchannel.RPKChatChannelService
+import com.rpkit.core.bukkit.extension.closestChatColor
 import com.rpkit.core.service.Services
 import com.rpkit.players.bukkit.profile.minecraft.RPKMinecraftProfileService
 import net.md_5.bungee.api.ChatColor
-import net.md_5.bungee.api.chat.BaseComponent
-import net.md_5.bungee.api.chat.ClickEvent
-import net.md_5.bungee.api.chat.HoverEvent
-import net.md_5.bungee.api.chat.TextComponent
-import net.md_5.bungee.api.chat.hover.content.Text
+import net.md_5.bungee.api.chat.*
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import java.awt.Color
 import java.util.regex.Pattern
 
 /**
@@ -66,7 +64,7 @@ class ListChatChannelsCommand(private val plugin: RPKChatBukkit) : CommandExecut
                 val messageComponents = mutableListOf<BaseComponent>()
                 val pattern = Pattern.compile("(\\\$\\{channel\\})|(\\\$\\{mute\\})|(${ChatColor.COLOR_CHAR}x(${ChatColor.COLOR_CHAR}[0-9a-f]){6})|(${ChatColor.COLOR_CHAR}[0-9a-f])")
                 val template = plugin.messages["listchatchannels-item", mapOf(
-                    "color" to ChatColor.of(chatChannel.color).toString()
+                    "color" to chatChannel.color.toString()
                 )]
                 val matcher = pattern.matcher(template)
                 var chatColor: ChatColor? = null
@@ -90,7 +88,7 @@ class ListChatChannelsCommand(private val plugin: RPKChatBukkit) : CommandExecut
                     if (matcher.group() == "\${channel}") {
                         val chatChannelComponent = TextComponent(chatChannel.name.value)
                         chatChannelComponent.clickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/chatchannel ${chatChannel.name.value}")
-                        chatChannelComponent.hoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, Text("Click to talk in ${chatChannel.name.value}"))
+                        chatChannelComponent.hoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, ComponentBuilder().append("Click to talk in ${chatChannel.name.value}").create())
                         if (chatColor != null) {
                             chatChannelComponent.color = chatColor
                         }
@@ -108,7 +106,7 @@ class ListChatChannelsCommand(private val plugin: RPKChatBukkit) : CommandExecut
                             }) {
                             val muteComponent = TextComponent("Mute")
                             muteComponent.clickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/mute ${chatChannel.name.value}")
-                            muteComponent.hoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, Text("Click to mute ${chatChannel.name.value}"))
+                            muteComponent.hoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, ComponentBuilder().append("Click to mute ${chatChannel.name.value}").create())
                             if (chatColor != null) {
                                 muteComponent.color = chatColor
                             }
@@ -123,7 +121,7 @@ class ListChatChannelsCommand(private val plugin: RPKChatBukkit) : CommandExecut
                         } else {
                             val unmuteComponent = TextComponent("Unmute")
                             unmuteComponent.clickEvent = ClickEvent(ClickEvent.Action.RUN_COMMAND, "/unmute ${chatChannel.name.value}")
-                            unmuteComponent.hoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, Text("Click to unmute ${chatChannel.name.value}"))
+                            unmuteComponent.hoverEvent = HoverEvent(HoverEvent.Action.SHOW_TEXT, ComponentBuilder().append("Click to unmute ${chatChannel.name.value}").create())
                             if (chatColor != null) {
                                 unmuteComponent.color = chatColor
                             }
@@ -139,17 +137,17 @@ class ListChatChannelsCommand(private val plugin: RPKChatBukkit) : CommandExecut
                     } else {
                         val match = matcher.group()
                         if (match.startsWith("${ChatColor.COLOR_CHAR}x") && match.length == 14) {
-                            chatColor = ChatColor.of("#${match[3]}${match[5]}${match[7]}${match[9]}${match[11]}${match[13]}")
+                            chatColor = Color.decode("#${match[3]}${match[5]}${match[7]}${match[9]}${match[11]}${match[13]}").closestChatColor()
                         } else {
-                            val colorOrFormat = ChatColor.getByChar(match.drop(1)[0])
-                            if (colorOrFormat?.color != null) {
-                                chatColor = colorOrFormat
+                            val colorOrFormat = org.bukkit.ChatColor.getByChar(match.drop(1)[0])
+                            if (colorOrFormat?.isColor == true) {
+                                chatColor = colorOrFormat.asBungee()
                                 chatFormat = null
                             }
-                            if (colorOrFormat?.color == null) {
-                                chatFormat = colorOrFormat
+                            if (colorOrFormat?.isFormat == true) {
+                                chatFormat = colorOrFormat.asBungee()
                             }
-                            if (colorOrFormat == ChatColor.RESET) {
+                            if (colorOrFormat == org.bukkit.ChatColor.RESET) {
                                 chatColor = null
                                 chatFormat = null
                             }

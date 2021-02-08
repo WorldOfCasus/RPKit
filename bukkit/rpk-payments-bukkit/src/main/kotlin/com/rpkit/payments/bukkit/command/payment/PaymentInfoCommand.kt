@@ -22,11 +22,7 @@ import com.rpkit.payments.bukkit.RPKPaymentsBukkit
 import com.rpkit.payments.bukkit.group.RPKPaymentGroupName
 import com.rpkit.payments.bukkit.group.RPKPaymentGroupService
 import com.rpkit.players.bukkit.profile.minecraft.RPKMinecraftProfileService
-import net.md_5.bungee.api.chat.BaseComponent
-import net.md_5.bungee.api.chat.ClickEvent
-import net.md_5.bungee.api.chat.HoverEvent
-import net.md_5.bungee.api.chat.TextComponent
-import net.md_5.bungee.api.chat.hover.content.Text
+import net.md_5.bungee.api.chat.*
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -353,7 +349,7 @@ class PaymentInfoCommand(private val plugin: RPKPaymentsBukkit) : CommandExecuto
                                                     )
                                                     textComponent.hoverEvent = HoverEvent(
                                                         HoverEvent.Action.SHOW_TEXT,
-                                                        Text("Click here to change the payment group name")
+                                                        ComponentBuilder().append("Click here to change the payment group name").create()
                                                     )
                                                     if (chatColor != null) {
                                                         textComponent.color = chatColor.asBungee()
@@ -385,7 +381,7 @@ class PaymentInfoCommand(private val plugin: RPKPaymentsBukkit) : CommandExecuto
                                                         )
                                                         textComponent.hoverEvent = HoverEvent(
                                                             HoverEvent.Action.SHOW_TEXT,
-                                                            Text("Click here to change the payment group amount")
+                                                            ComponentBuilder().append("Click here to change the payment group amount").create()
                                                         )
                                                         if (chatColor != null) {
                                                             textComponent.color = chatColor.asBungee()
@@ -418,7 +414,7 @@ class PaymentInfoCommand(private val plugin: RPKPaymentsBukkit) : CommandExecuto
                                                         )
                                                         textComponent.hoverEvent = HoverEvent(
                                                             HoverEvent.Action.SHOW_TEXT,
-                                                            Text("Click here to change the payment group currency")
+                                                            ComponentBuilder().append("Click here to change the payment group currency").create()
                                                         )
                                                         if (chatColor != null) {
                                                             textComponent.color = chatColor.asBungee()
@@ -451,7 +447,7 @@ class PaymentInfoCommand(private val plugin: RPKPaymentsBukkit) : CommandExecuto
                                                         )
                                                         textComponent.hoverEvent = HoverEvent(
                                                             HoverEvent.Action.SHOW_TEXT,
-                                                            Text("Click here to change the payment group interval")
+                                                            ComponentBuilder().append("Click here to change the payment group interval").create()
                                                         )
                                                         if (chatColor != null) {
                                                             textComponent.color = chatColor.asBungee()

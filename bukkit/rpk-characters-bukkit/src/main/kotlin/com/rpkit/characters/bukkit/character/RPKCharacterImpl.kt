@@ -26,11 +26,7 @@ import com.rpkit.core.location.RPKLocation
 import com.rpkit.core.service.Services
 import com.rpkit.players.bukkit.profile.RPKProfile
 import com.rpkit.players.bukkit.profile.minecraft.RPKMinecraftProfile
-import net.md_5.bungee.api.chat.BaseComponent
-import net.md_5.bungee.api.chat.ClickEvent
-import net.md_5.bungee.api.chat.HoverEvent
-import net.md_5.bungee.api.chat.TextComponent
-import net.md_5.bungee.api.chat.hover.content.Text
+import net.md_5.bungee.api.chat.*
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.inventory.ItemStack
@@ -156,8 +152,8 @@ class RPKCharacterImpl(
                                             ClickEvent(ClickEvent.Action.RUN_COMMAND, "/character set ${field.name}")
                                         editComponent.hoverEvent = HoverEvent(
                                             HoverEvent.Action.SHOW_TEXT,
-                                            Text("Click to change your character's ${field.name}")
-                                        )
+                                            ComponentBuilder().append("Click to change your character's ${field.name}")
+                                        .create())
                                         if (chatColor != null) {
                                             editComponent.color = chatColor.asBungee()
                                         }
@@ -194,8 +190,8 @@ class RPKCharacterImpl(
                                                 )
                                                 unhideComponent.hoverEvent = HoverEvent(
                                                     HoverEvent.Action.SHOW_TEXT,
-                                                    Text("Click to unhide your character's ${field.name}")
-                                                )
+                                                    ComponentBuilder().append("Click to unhide your character's ${field.name}")
+                                                .create())
                                                 messageComponents.add(unhideComponent)
                                             } else {
                                                 val hideComponent = TextComponent("Hide")
@@ -205,8 +201,8 @@ class RPKCharacterImpl(
                                                 )
                                                 hideComponent.hoverEvent = HoverEvent(
                                                     HoverEvent.Action.SHOW_TEXT,
-                                                    Text("Click to hide your character's ${field.name}")
-                                                )
+                                                    ComponentBuilder().append("Click to hide your character's ${field.name}")
+                                                .create())
                                                 messageComponents.add(hideComponent)
                                             }
                                             if (chatColor != null) {

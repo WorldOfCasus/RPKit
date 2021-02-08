@@ -20,7 +20,6 @@ import com.rpkit.chat.bukkit.chatchannel.format.FormatPart
 import com.rpkit.chat.bukkit.context.DirectedPreFormatMessageContext
 import net.md_5.bungee.api.chat.HoverEvent
 import net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT
-import net.md_5.bungee.api.chat.hover.content.Text
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.configuration.serialization.SerializableAs
 import java.util.concurrent.CompletableFuture.supplyAsync
@@ -30,7 +29,7 @@ class ShowTextHoverAction(val text: List<FormatPart>) : HoverAction, Configurati
     override fun toHoverEvent(context: DirectedPreFormatMessageContext) = supplyAsync {
         HoverEvent(
             SHOW_TEXT,
-            Text(text.flatMap { it.toChatComponents(context).join().toList() }.toTypedArray())
+            text.flatMap { it.toChatComponents(context).join().toList() }.toTypedArray()
         )
     }
 

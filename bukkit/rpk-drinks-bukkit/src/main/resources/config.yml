@@ -2,14 +2,14 @@ drinks:
   beer:
     item:
       ==: org.bukkit.inventory.ItemStack
-      v: 2586
+      v: 2230
       type: POTION
       meta:
         ==: ItemMeta
         meta-type: POTION
-        display-name: '{"extra":[{"text":"Beer"}],"text":""}'
+        display-name: 'Beer'
         lore:
-          - '{"extra":[{"text":"Alcoholic drink fermented from grain starches."}],"text":""}'
+          - 'Alcoholic drink fermented from grain starches.'
     recipe:
       WHEAT: 1
       POTION: 1
@@ -19,14 +19,14 @@ drinks:
   wine:
     item:
       ==: org.bukkit.inventory.ItemStack
-      v: 2586
+      v: 2230
       type: POTION
       meta:
         ==: ItemMeta
         meta-type: POTION
-        display-name: '{"extra":[{"text":"Wine"}],"text":""}'
+        display-name: 'Wine'
         lore:
-          - '{"extra":[{"text":"Alcoholic beverage fermented from grapes."}],"text":""}'
+          - 'Alcoholic beverage fermented from grapes.'
     recipe:
       SWEET_BERRIES: 1
       POTION: 1
@@ -34,14 +34,14 @@ drinks:
   vodka:
     item:
       ==: org.bukkit.inventory.ItemStack
-      v: 2586
+      v: 2230
       type: POTION
       meta:
         ==: ItemMeta
         meta-type: POTION
-        display-name: '{"extra":[{"text":"Vodka"}],"text":""}'
+        display-name: 'Vodka'
         lore:
-          - '{"extra":[{"text":"Beverage made from the distillation of fermented potatoes."}],"text":""}'
+          - 'Beverage made from the distillation of fermented potatoes.'
     recipe:
       POISONOUS_POTATO: 1
       POTION: 1
@@ -49,14 +49,14 @@ drinks:
   whisky:
     item:
       ==: org.bukkit.inventory.ItemStack
-      v: 2586
+      v: 2230
       type: POTION
       meta:
         ==: ItemMeta
         meta-type: POTION
-        display-name: '{"extra":[{"text":"Whisky"}],"text":""}'
+        display-name: 'Whisky'
         lore:
-          - '{"extra":[{"text":"Distilled alcoholic beverage made from fermented grain mash."}],"text":""}'
+          - 'Distilled alcoholic beverage made from fermented grain mash.'
     recipe:
       WHEAT: 5
       POTION: 1
@@ -64,15 +64,14 @@ drinks:
   rum:
     item:
       ==: org.bukkit.inventory.ItemStack
-      v: 2586
+      v: 2230
       type: POTION
       meta:
         ==: ItemMeta
         meta-type: POTION
-        display-name: '{"extra":[{"text":"Rum"}],"text":""}'
+        display-name: 'Rum'
         lore:
-          - '{"extra":[{"text":"Distilled alcoholic beverage made from sugarcane byproducts
-          by process of fermentation and distillation."}],"text":""}'
+          - 'Distilled alcoholic beverage made from sugarcane byproducts by process of fermentation and distillation.'
     recipe:
       SUGAR_CANE: 1
       POTION: 1
@@ -80,14 +79,14 @@ drinks:
   cider:
     item:
       ==: org.bukkit.inventory.ItemStack
-      v: 2586
+      v: 2230
       type: POTION
       meta:
         ==: ItemMeta
         meta-type: POTION
-        display-name: '{"extra":[{"text":"Cider"}],"text":""}'
+        display-name: 'Cider'
         lore:
-          - '{"extra":[{"text":"Alcoholic beverage made from the fermented juice of apples."}],"text":""}'
+          - 'Alcoholic beverage made from the fermented juice of apples.'
     recipe:
       APPLE: 1
       POTION: 1

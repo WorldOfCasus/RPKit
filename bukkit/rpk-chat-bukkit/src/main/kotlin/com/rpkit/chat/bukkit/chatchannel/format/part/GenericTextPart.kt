@@ -20,8 +20,10 @@ import com.rpkit.chat.bukkit.chatchannel.format.FormatPart
 import com.rpkit.chat.bukkit.chatchannel.format.click.ClickAction
 import com.rpkit.chat.bukkit.chatchannel.format.hover.HoverAction
 import com.rpkit.chat.bukkit.context.DirectedPreFormatMessageContext
+import com.rpkit.core.bukkit.extension.closestChatColor
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.TextComponent.fromLegacyText
+import java.awt.Color
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletableFuture.supplyAsync
 
@@ -43,8 +45,8 @@ abstract class GenericTextPart(
     override fun toChatComponents(context: DirectedPreFormatMessageContext) = supplyAsync {
         fromLegacyText(getText(context).join()).also {
             for (component in it) {
-                if (font != null) component.font = font
-                if (color != null) component.color = ChatColor.of(color)
+                //if (font != null) component.font = font
+                if (color != null) component.color = Color.decode(color).closestChatColor()
                 if (isBold != null) component.isBold = isBold
                 if (isItalic != null) component.isItalic = isItalic
                 if (isUnderlined != null) component.isUnderlined = isUnderlined

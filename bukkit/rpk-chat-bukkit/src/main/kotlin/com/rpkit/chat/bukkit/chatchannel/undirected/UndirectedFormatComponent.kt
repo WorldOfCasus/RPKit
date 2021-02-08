@@ -19,11 +19,13 @@ import com.rpkit.characters.bukkit.character.RPKCharacterService
 import com.rpkit.chat.bukkit.chatchannel.pipeline.UndirectedPipelineComponent
 import com.rpkit.chat.bukkit.context.UndirectedMessageContext
 import com.rpkit.chat.bukkit.prefix.RPKPrefixService
+import com.rpkit.core.bukkit.extension.closestChatColor
 import com.rpkit.core.service.Services
 import com.rpkit.players.bukkit.profile.RPKProfile
 import net.md_5.bungee.api.ChatColor
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.configuration.serialization.SerializableAs
+import java.awt.Color
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletableFuture.supplyAsync
 
@@ -69,7 +71,7 @@ class UndirectedFormatComponent(var formatString: String) : UndirectedPipelineCo
                 formattedMessage = formattedMessage.replace("\$channel", chatChannel.name.value)
             }
             if (formattedMessage.contains("\$color") || formattedMessage.contains("\$colour")) {
-                val chatColorString = ChatColor.of(chatChannel.color).toString()
+                val chatColorString = chatChannel.color.closestChatColor().toString()
                 formattedMessage =
                     formattedMessage.replace("\$color", chatColorString).replace("\$colour", chatColorString)
             }

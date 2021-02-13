@@ -64,7 +64,7 @@ class ListChatChannelsCommand(private val plugin: RPKChatBukkit) : CommandExecut
                 val messageComponents = mutableListOf<BaseComponent>()
                 val pattern = Pattern.compile("(\\\$\\{channel\\})|(\\\$\\{mute\\})|(${ChatColor.COLOR_CHAR}x(${ChatColor.COLOR_CHAR}[0-9a-f]){6})|(${ChatColor.COLOR_CHAR}[0-9a-f])")
                 val template = plugin.messages["listchatchannels-item", mapOf(
-                    "color" to chatChannel.color.toString()
+                    "color" to chatChannel.color.closestChatColor().toString()
                 )]
                 val matcher = pattern.matcher(template)
                 var chatColor: ChatColor? = null
